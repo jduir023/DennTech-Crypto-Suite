@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Build artifacts
+build/
+dist/
+*.spec.bak
+
+# Local data / secrets (API keys, portfolio)
+data/
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+
+# OS
+Thumbs.db
+.DS_Store

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DennTech Crypto Suite — User Manual</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0D1117;
+      color: #C9D1D9;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    a { color: #58A6FF; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      background: linear-gradient(135deg, #161B22 0%, #0D1117 100%);
+      border-bottom: 1px solid #21262D;
+      padding: 40px 20px 32px;
+      text-align: center;
+    }
+    header .badge {
+      display: inline-block;
+      background: #1F6FEB22;
+      border: 1px solid #1F6FEB55;
+      color: #58A6FF;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #F0F6FC;
+      margin-bottom: 10px;
+    }
+    header p {
+      color: #8B949E;
+      font-size: 15px;
+      max-width: 560px;
+      margin: 0 auto 18px;
+    }
+    header .pills { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .pill {
+      background: #161B22;
+      border: 1px solid #21262D;
+      color: #8B949E;
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+    .pill span { color: #58A6FF; }
+
+    .toc-wrap {
+      max-width: 820px;
+      margin: 36px auto 0;
+      padding: 0 20px;
+    }
+    .toc {
+      background: #161B22;
+      border: 1px solid #21262D;
+      border-radius: 10px;
+      padding: 22px 26px;
+    }
+    .toc h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: #8B949E; margin-bottom: 14px; }
+    .toc ol { padding-left: 18px; }
+    .toc li { margin: 6px 0; }
+    .toc a { color: #58A6FF; font-size: 14px; }
+
+    main {
+      max-width: 820px;
+      margin: 40px auto 60px;
+      padding: 0 20px;
+    }
+
+    .section {
+      background: #161B22;
+      border: 1px solid #21262D;
+      border-radius: 10px;
+      padding: 28px 30px;
+      margin-bottom: 24px;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #21262D;
+    }
+    .tab-num {
+      background: #1F6FEB;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .tab-num.green { background: #238636; }
+    .tab-num.purple { background: #6E40C9; }
+    .tab-num.orange { background: #D29922; color: #0D1117; }
+    .tab-num.teal   { background: #0E7490; }
+    .tab-num.pink   { background: #BF4B8A; }
+    .tab-num.gold   { background: #A16207; }
+    .section-header h2 { font-size: 1.15rem; font-weight: 700; color: #F0F6FC; }
+    .section-header .sub { font-size: 12px; color: #8B949E; margin-top: 2px; }
+
+    h3 { font-size: 14px; font-weight: 600; color: #F0F6FC; margin: 18px 0 8px; }
+    p { color: #C9D1D9; margin-bottom: 10px; }
+    ul, ol { padding-left: 20px; margin-bottom: 10px; }
+    li { margin: 5px 0; color: #C9D1D9; }
+    li strong, p strong { color: #F0F6FC; }
+
+    .highlight-box {
+      background: #0D1117;
+      border: 1px solid #21262D;
+      border-left: 3px solid #1F6FEB;
+      border-radius: 0 6px 6px 0;
+      padding: 12px 16px;
+      margin: 14px 0;
+      font-size: 14px;
+    }
+    .highlight-box.green { border-left-color: #238636; }
+    .highlight-box.purple { border-left-color: #6E40C9; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 13px;
+    }
+    th {
+      background: #0D1117;
+      color: #8B949E;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: .06em;
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid #21262D;
+    }
+    td {
+      padding: 9px 12px;
+      border-bottom: 1px solid #21262D;
+      color: #C9D1D9;
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #0D1117; }
+    td:first-child { color: #58A6FF; font-weight: 600; white-space: nowrap; }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+      margin: 14px 0;
+    }
+    .stat-card {
+      background: #0D1117;
+      border: 1px solid #21262D;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .stat-card .label { font-size: 11px; color: #8B949E; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 4px; }
+    .stat-card .value { font-size: 15px; font-weight: 700; color: #F0F6FC; }
+
+    code {
+      background: #0D1117;
+      border: 1px solid #21262D;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 13px;
+      color: #79C0FF;
+    }
+
+    .intro-section {
+      background: #161B22;
+      border: 1px solid #21262D;
+      border-radius: 10px;
+      padding: 28px 30px;
+      margin-bottom: 24px;
+    }
+    .intro-section h2 { font-size: 1.1rem; font-weight: 700; color: #F0F6FC; margin-bottom: 10px; }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid #21262D;
+      color: #6E7681;
+      font-size: 13px;
+    }
+    footer a { color: #58A6FF; }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.5rem; }
+      .section { padding: 20px 18px; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="badge">Free Windows App &nbsp;·&nbsp; v1.0.0</div>
+  <h1>DennTech Crypto Suite</h1>
+  <p>User Manual — seven professional-grade crypto tools in one local desktop application. No account, no subscription, no cloud.</p>
+  <div class="pills">
+    <div class="pill"><span>7</span> Tools</div>
+    <div class="pill"><span>25</span> Strategies</div>
+    <div class="pill"><span>3</span> Tax Methods</div>
+    <div class="pill">100% Local</div>
+    <div class="pill">Free Forever</div>
+  </div>
+</header>
+
+<div class="toc-wrap">
+  <div class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#getting-started">Getting Started</a></li>
+      <li><a href="#portfolio">Portfolio Tracker</a></li>
+      <li><a href="#risk">Risk Calculator</a></li>
+      <li><a href="#dca">DCA Planner</a></li>
+      <li><a href="#backtester">Strategy Backtester</a></li>
+      <li><a href="#tax">Tax Estimator</a></li>
+      <li><a href="#comparison">Coin Comparison</a></li>
+      <li><a href="#bot">Bot Monitor</a></li>
+      <li><a href="#data">Data &amp; Privacy</a></li>
+    </ol>
+  </div>
+</div>
+
+<main>
+
+  <!-- GETTING STARTED -->
+  <div class="intro-section" id="getting-started">
+    <h2>Getting Started</h2>
+    <p>Double-click <strong>DennTechCryptoSuite.exe</strong> to launch. A splash screen appears briefly while the app initializes, then the main window opens on the Portfolio Tracker tab. The app requires no installation — all settings and portfolio data are saved automatically in the <code>data/</code> folder next to the executable.</p>
+    <div class="highlight-box">
+      <strong>First launch:</strong> The app copies default config and portfolio files into <code>data/</code> automatically. You can edit <code>data/config.json</code> to customize risk presets and bot bridge settings at any time.
+    </div>
+  </div>
+
+  <!-- TAB 1 — PORTFOLIO -->
+  <div class="section" id="portfolio">
+    <div class="section-header">
+      <div class="tab-num">1</div>
+      <div>
+        <h2>Portfolio Tracker</h2>
+        <div class="sub">Track holdings, P&amp;L, and allocation in real time</div>
+      </div>
+    </div>
+    <p>Add crypto holdings by clicking <strong>Add Holding</strong> and entering the coin, quantity, and average buy price. Live prices are fetched from CoinGecko and the tracker instantly calculates unrealized P&amp;L in both USD and percentage for each position as well as your overall portfolio.</p>
+    <h3>Key Features</h3>
+    <ul>
+      <li><strong>Add / Edit / Remove</strong> holdings from the sortable table</li>
+      <li><strong>Import CSV</strong> for bulk entry of existing positions</li>
+      <li><strong>Allocation view</strong> — percentage breakdown of each coin by value</li>
+      <li><strong>Save Snapshot</strong> — records the portfolio state to history so you can track growth over time</li>
+      <li>Total portfolio value and aggregate P&amp;L displayed at the top</li>
+    </ul>
+    <div class="highlight-box green">Portfolio data is stored in <code>data/portfolio.json</code> and persists between sessions.</div>
+  </div>
+
+  <!-- TAB 2 — RISK -->
+  <div class="section" id="risk">
+    <div class="section-header">
+      <div class="tab-num green">2</div>
+      <div>
+        <h2>Risk Calculator</h2>
+        <div class="sub">Position sizing and risk management for every trade</div>
+      </div>
+    </div>
+    <p>Enter the trade parameters and the calculator returns exact position sizes and risk metrics — eliminating guesswork before you enter any position.</p>
+    <h3>Inputs</h3>
+    <ul>
+      <li><strong>Account Balance</strong> — total trading capital</li>
+      <li><strong>Risk %</strong> — percentage of balance you are willing to lose if stopped out</li>
+      <li><strong>Entry Price</strong>, <strong>Stop-Loss Price</strong>, <strong>Take-Profit Price</strong></li>
+      <li><strong>Leverage</strong> (1× for spot, higher for futures)</li>
+      <li><strong>Fee %</strong> — taker fee per side</li>
+    </ul>
+    <h3>Outputs</h3>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="label">Position Size</div><div class="value">USD &amp; Units</div></div>
+      <div class="stat-card"><div class="label">Required Margin</div><div class="value">USD</div></div>
+      <div class="stat-card"><div class="label">Max Loss (w/ fees)</div><div class="value">USD</div></div>
+      <div class="stat-card"><div class="label">Reward Amount</div><div class="value">USD</div></div>
+      <div class="stat-card"><div class="label">Risk / Reward</div><div class="value">Ratio</div></div>
+      <div class="stat-card"><div class="label">Break-Even</div><div class="value">Price</div></div>
+      <div class="stat-card"><div class="label">Liquidation Price</div><div class="value">Leveraged only</div></div>
+    </div>
+    <h3>Presets</h3>
+    <p>Five presets ship by default. Load one instantly from the dropdown and all fields populate automatically.</p>
+    <table>
+      <thead><tr><th>Preset</th><th>Risk %</th><th>Use Case</th></tr></thead>
+      <tbody>
+        <tr><td>BTC Swing 1%</td><td>1.0%</td><td>Medium-term BTC swings</td></tr>
+        <tr><td>ETH Scalp 0.5%</td><td>0.5%</td><td>Short-term ETH scalps</td></tr>
+        <tr><td>SOL Aggressive 2%</td><td>2.0%</td><td>Higher-risk SOL positions</td></tr>
+        <tr><td>Futures 3× BTC</td><td>1.0%</td><td>Leveraged BTC futures</td></tr>
+        <tr><td>Conservative 0.25%</td><td>0.25%</td><td>Low-risk, capital preservation</td></tr>
+      </tbody>
+    </table>
+    <p>Add your own presets by editing the <code>risk_presets</code> array in <code>data/config.json</code>.</p>
+  </div>
+
+  <!-- TAB 3 — DCA -->
+  <div class="section" id="dca">
+    <div class="section-header">
+      <div class="tab-num purple">3</div>
+      <div>
+        <h2>DCA Planner</h2>
+        <div class="sub">Simulate dollar-cost averaging against real historical data</div>
+      </div>
+    </div>
+    <p>The DCA Planner lets you replay any DCA strategy against real historical price data to see exactly how it would have performed — and compare it against investing everything at once.</p>
+    <h3>How to Use</h3>
+    <ol>
+      <li>Select a <strong>coin</strong> from the dropdown</li>
+      <li>Enter a <strong>USD amount per period</strong> (e.g. $100)</li>
+      <li>Choose a <strong>frequency</strong>: weekly, biweekly, or monthly</li>
+      <li>Set a <strong>date range</strong> (up to 365 days of history)</li>
+      <li>Click <strong>Run Simulation</strong></li>
+    </ol>
+    <h3>Results</h3>
+    <ul>
+      <li>Full <strong>purchase log</strong> — date, price paid, units bought, cumulative invested and units held</li>
+      <li><strong>Final value</strong> vs. total invested and total return %</li>
+      <li><strong>DCA vs. lump-sum comparison</strong> — see whether spreading buys beat a single entry at the start</li>
+      <li>Average, best, and worst purchase prices</li>
+      <li>Interactive <strong>chart</strong> overlaying DCA portfolio value, lump-sum value, and coin price over time</li>
+    </ul>
+  </div>
+
+  <!-- TAB 4 — BACKTESTER -->
+  <div class="section" id="backtester">
+    <div class="section-header">
+      <div class="tab-num orange">4</div>
+      <div>
+        <h2>Strategy Backtester</h2>
+        <div class="sub">25 algorithmic strategies tested against real OHLCV data</div>
+      </div>
+    </div>
+    <p>Select a coin, timeframe, and one of 25 built-in strategies. Tune the parameters, set your starting capital and fee %, then run the backtest to see detailed performance metrics and an equity curve.</p>
+    <h3>Strategy Packs</h3>
+    <table>
+      <thead><tr><th>Pack</th><th>Strategies</th></tr></thead>
+      <tbody>
+        <tr><td>Core Signals</td><td>RSI, MACD, EMA Spread, MACD Histogram, SMA Cross</td></tr>
+        <tr><td>Trend &amp; Momentum</td><td>Trend Following, Momentum Trading, Volatility Breakout, ADX Filter, Step Gain</td></tr>
+        <tr><td>Reversion &amp; Grid</td><td>Mean Reversion, Grid Trading, Bollinger Bands, DCA, Grid-DCA Hybrid</td></tr>
+        <tr><td>Quant Portfolio</td><td>Regime Switching, Pair Trading, Portfolio Rebalancing, TSA, TSSL</td></tr>
+        <tr><td>Execution Alpha</td><td>Arbitrage, Market Making, Scalping, Gain Strategy, Emotionless</td></tr>
+      </tbody>
+    </table>
+    <h3>Backtest Parameters</h3>
+    <ul>
+      <li><strong>Coin &amp; Timeframe</strong> — 1d / 4h / 1h candles</li>
+      <li><strong>Lookback Period</strong> — number of historical candles to fetch</li>
+      <li><strong>Starting Capital</strong> — simulated USD account size</li>
+      <li><strong>Fee %</strong> — applied to every buy and sell</li>
+      <li><strong>Trade Size %</strong> — portion of available cash used per entry</li>
+      <li>Per-strategy parameters (e.g. RSI period, Bollinger std dev, ATR multiplier, grid spacing)</li>
+    </ul>
+    <h3>Results</h3>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="label">Total Return</div><div class="value">%</div></div>
+      <div class="stat-card"><div class="label">Final Equity</div><div class="value">USD</div></div>
+      <div class="stat-card"><div class="label">Total Trades</div><div class="value">Count</div></div>
+      <div class="stat-card"><div class="label">Win Rate</div><div class="value">%</div></div>
+      <div class="stat-card"><div class="label">Profit Factor</div><div class="value">Ratio</div></div>
+      <div class="stat-card"><div class="label">Max Drawdown</div><div class="value">%</div></div>
+    </div>
+    <p>An <strong>equity curve chart</strong> and a <strong>trade-by-trade log</strong> (last 100 trades) are shown below the summary stats.</p>
+    <div class="highlight-box purple">Strategies need at least 30 candles of data to run. Use a longer lookback for more reliable statistics.</div>
+  </div>
+
+  <!-- TAB 5 — TAX -->
+  <div class="section" id="tax">
+    <div class="section-header">
+      <div class="tab-num teal">5</div>
+      <div>
+        <h2>Tax Estimator</h2>
+        <div class="sub">FIFO, LIFO, and HIFO capital gains calculation with CSV export</div>
+      </div>
+    </div>
+    <p>Import your exchange transaction history and calculate realized capital gains or losses using the accounting method of your choice.</p>
+    <h3>Supported Exchange CSV Formats</h3>
+    <ul>
+      <li><strong>Coinbase</strong> — standard export format</li>
+      <li><strong>Binance.US</strong> — Date(UTC) format</li>
+      <li><strong>Kraken</strong> — ledger export</li>
+      <li><strong>Generic</strong> — <code>date, type, coin, amount, price_usd, fee_usd</code></li>
+    </ul>
+    <h3>Accounting Methods</h3>
+    <ul>
+      <li><strong>FIFO</strong> (First In, First Out) — oldest lots sold first; common default in most jurisdictions</li>
+      <li><strong>LIFO</strong> (Last In, First Out) — newest lots sold first</li>
+      <li><strong>HIFO</strong> (Highest In, First Out) — highest-cost lots sold first; minimizes realized gains</li>
+    </ul>
+    <h3>Output</h3>
+    <ul>
+      <li>Transaction table with matched lots and gain/loss per sale</li>
+      <li>Per-coin realized gains summary</li>
+      <li>Short-term vs. long-term capital gains breakdown (held &lt; 1 year vs. ≥ 1 year)</li>
+      <li>Estimated tax liability at a configurable tax rate</li>
+      <li><strong>Export CSV</strong> — saves the full gains report for your accountant or tax software</li>
+    </ul>
+  </div>
+
+  <!-- TAB 6 — COMPARISON -->
+  <div class="section" id="comparison">
+    <div class="section-header">
+      <div class="tab-num pink">6</div>
+      <div>
+        <h2>Coin Comparison</h2>
+        <div class="sub">Side-by-side benchmarking across multiple assets</div>
+      </div>
+    </div>
+    <p>Compare multiple cryptocurrencies side-by-side over a shared time window. The comparison table displays 24h change %, 7d change %, market cap, volume, and 90-day performance statistics so you can quickly benchmark assets against each other without switching between tools or browser tabs.</p>
+    <p>Select coins from the dropdown list and click <strong>Compare</strong>. Data is fetched live from CoinGecko and displayed in a sortable table.</p>
+  </div>
+
+  <!-- TAB 7 — BOT MONITOR -->
+  <div class="section" id="bot">
+    <div class="section-header">
+      <div class="tab-num gold">7</div>
+      <div>
+        <h2>Bot Monitor</h2>
+        <div class="sub">Live status panel for the DennTech Trading Bot</div>
+      </div>
+    </div>
+    <p>If you run the <strong>DennTech Trading Bot</strong> on your local machine, the Bot Monitor tab connects to its HTTP API and displays live operational status in real time.</p>
+    <h3>What it Shows</h3>
+    <ul>
+      <li>Bot health status (running / stopped / error)</li>
+      <li>Active strategy and current open position details</li>
+      <li>Unrealized P&amp;L on any open trade</li>
+      <li>Account balance as reported by the bot</li>
+      <li>Bot uptime and recent trade log</li>
+    </ul>
+    <h3>Configuration</h3>
+    <p>Open <code>data/config.json</code> and edit the <code>bot_bridge</code> section:</p>
+    <div class="highlight-box">
+      <code>base_url</code> — default <strong>http://127.0.0.1:8765</strong><br>
+      <code>api_key</code> — leave empty if the bot runs without authentication<br>
+      <code>poll_ms</code> — refresh interval in milliseconds (default 2000)
+    </div>
+    <p>The connection is entirely local — no cloud relay, no external server. The bot must be running on the same machine for this tab to show data.</p>
+  </div>
+
+  <!-- DATA & PRIVACY -->
+  <div class="intro-section" id="data">
+    <h2>Data &amp; Privacy</h2>
+    <p>Everything stays on your machine. No telemetry is collected. No account is required. Price data is fetched from the <strong>CoinGecko public API</strong> and cached locally in <code>data/cache/</code> to reduce repeated requests.</p>
+    <table>
+      <thead><tr><th>File</th><th>Contents</th></tr></thead>
+      <tbody>
+        <tr><td><code>data/config.json</code></td><td>App settings, risk presets, bot bridge configuration</td></tr>
+        <tr><td><code>data/portfolio.json</code></td><td>Your saved holdings and snapshot history</td></tr>
+        <tr><td><code>data/cache/</code></td><td>Cached market data from CoinGecko (auto-managed)</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:14px; color:#6E7681; font-size:13px;"><em>DennTech Crypto Suite is a free educational tool. Nothing in this application constitutes financial advice. Always do your own research before making investment decisions.</em></p>
+  </div>
+
+</main>
+
+<footer>
+  <p>DennTech Crypto Suite v1.0.0 &nbsp;·&nbsp; <a href="https://cryptotradebot.info">cryptotradebot.info</a> &nbsp;·&nbsp; Free forever</p>
+</footer>
+
+</body>
+</html>
